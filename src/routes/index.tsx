@@ -380,21 +380,47 @@ function Reviews() {
 }
 
 function Contact() {
-  const [submitted, setSubmitted] = useState(false);
-  const formRef = useRef<HTMLFormElement>(null);
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = formRef.current;
-    if (!form) return;
+    const form = e.currentTarget;
     const fd = new FormData(form);
-    // Placeholder — replace with the actual Google Sheets webhook URL when provided.
-    const SHEET_URL = ""; // e.g. "https://script.google.com/macros/s/XXXX/exec"
-    if (SHEET_URL) {
-      fetch(SHEET_URL, { method: "POST", mode: "no-cors", body: fd }).catch(() => {});
+    const name = String(fd.get('name') || '').trim();
+    const phone = String(fd.get('phone') || '').trim();
+    const goal = String(fd.get('goal') || '');
+    const preferredTiming = String(fd.get('preferredTiming') || '');
+    const message = String(fd.get('message') || '').trim();
+
+    const errors: Record<string, string> = {};
+    if (!name) errors.name = 'Name is required';
+    if (!phone) errors.phone = 'Phone is required';
+    if (!goal) errors.goal = 'Please select a goal';
+    if (!preferredTiming) errors.preferredTiming = 'Please select a preferred timing';
+
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      setSubmitStatus('idle');
+      return;
     }
-    setSubmitted(true);
-    form.reset();
+
+    setFormErrors({});
+    setSubmitStatus('idle');
+
+    fetch('https://script.google.com/macros/s/AKfycbz9mhPS7bbWRiSPj0sV4b4LBRddyzc27SCRt3T7e9zpjm-GpLZ95qisO7WA3jt6mo85/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, goal, preferredTiming, message }),
+    })
+      .then(() => {
+        setSubmitStatus('success');
+        form.reset();
+      })
+      .catch(() => {
+        setSubmitStatus('error');
+      });
   };
 
   return (
@@ -471,16 +497,16 @@ function Contact() {
               <span>→</span>
             </a>
 
-            {submitted ? (
+            {submitStatus === 'success' ? (
               <div className="bg-ink-2 border border-brand p-10 text-center">
                 <div className="text-6xl mb-4">💪</div>
                 <h3 className="font-display text-3xl mb-3 text-brand">You're In!</h3>
                 <p className="text-white/80">
-                  Thank you! We will get back to you shortly to get you started.
+                  Thank you! We will get back to you shortly to get you started 💪
                 </p>
                 <button
                   type="button"
-                  onClick={() => setSubmitted(false)}
+                  onClick={() => setSubmitStatus('idle')}
                   className="mt-6 text-sm uppercase tracking-widest text-white/60 hover:text-brand"
                 >
                   Submit another →
@@ -488,12 +514,11 @@ function Contact() {
               </div>
             ) : (
               <form
-                ref={formRef}
                 onSubmit={onSubmit}
                 className="bg-ink-2 border border-border p-6 md:p-8 space-y-4"
               >
-                <Field label="Name" name="name" type="text" required placeholder="Your full name" />
-                <Field label="Phone" name="phone" type="tel" required placeholder="+91 ..." />
+                <Field label="Name" name="name" type="text" required placeholder="Your full name" error={formErrors.name} />
+                <Field label="Phone" name="phone" type="tel" required placeholder="+91 ..." error={formErrors.phone} />
                 <SelectField
                   label="Goal"
                   name="goal"
@@ -505,11 +530,13 @@ function Contact() {
                     "Group Classes",
                     "Other",
                   ]}
+                  error={formErrors.goal}
                 />
                 <SelectField
                   label="Preferred Timing"
-                  name="timing"
+                  name="preferredTiming"
                   options={["Morning", "Afternoon", "Evening", "Night"]}
+                  error={formErrors.preferredTiming}
                 />
                 <div>
                   <label className="block text-xs uppercase tracking-widest text-white/60 mb-2">
@@ -522,6 +549,11 @@ function Contact() {
                     className="w-full bg-ink border border-border focus:border-brand focus:outline-none px-4 py-3 text-white placeholder:text-white/30"
                   />
                 </div>
+                {submitStatus === 'error' && (
+                  <div className="bg-red-600/10 border border-red-600/40 text-red-400 px-4 py-3 text-sm">
+                    Something went wrong, please call us on {PHONE_DISPLAY}
+                  </div>
+                )}
                 <button
                   type="submit"
                   className="w-full bg-brand hover:bg-[var(--brand-dark)] text-white font-bold uppercase tracking-wider px-6 py-4 transition-colors"
@@ -538,8 +570,8 @@ function Contact() {
 }
 
 function Field({
-  label, name, type, required, placeholder,
-}: { label: string; name: string; type: string; required?: boolean; placeholder?: string }) {
+  label, name, type, required, placeholder, error,
+}: { label: string; name: string; type: string; required?: boolean; placeholder?: string; error?: string }) {
   return (
     <div>
       <label className="block text-xs uppercase tracking-widest text-white/60 mb-2">
@@ -550,13 +582,14 @@ function Field({
         name={name}
         required={required}
         placeholder={placeholder}
-        className="w-full bg-ink border border-border focus:border-brand focus:outline-none px-4 py-3 text-white placeholder:text-white/30"
+        className={`w-full bg-ink border focus:outline-none px-4 py-3 text-white placeholder:text-white/30 ${error ? 'border-red-500' : 'border-border focus:border-brand'}`}
       />
+      {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
     </div>
   );
 }
 
-function SelectField({ label, name, options }: { label: string; name: string; options: string[] }) {
+function SelectField({ label, name, options, error }: { label: string; name: string; options: string[]; error?: string }) {
   return (
     <div>
       <label className="block text-xs uppercase tracking-widest text-white/60 mb-2">{label}</label>
@@ -564,13 +597,14 @@ function SelectField({ label, name, options }: { label: string; name: string; op
         name={name}
         defaultValue=""
         required
-        className="w-full bg-ink border border-border focus:border-brand focus:outline-none px-4 py-3 text-white"
+        className={`w-full bg-ink border focus:outline-none px-4 py-3 text-white ${error ? 'border-red-500' : 'border-border focus:border-brand'}`}
       >
         <option value="" disabled>Select...</option>
         {options.map((o) => (
           <option key={o} value={o}>{o}</option>
         ))}
       </select>
+      {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
     </div>
   );
 }
