@@ -2,7 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import heroImg from "@/assets/hero-gym.jpg";
 import aboutAsset from "@/assets/about-training.jpg.asset.json";
+import logoAsset from "@/assets/swerve-logo.png.asset.json";
 const aboutImg = aboutAsset.url;
+const logoImg = logoAsset.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -78,8 +80,9 @@ function Header() {
       }`}
     >
       <div className="mx-auto max-w-7xl px-5 flex items-center justify-between gap-4">
-        <a href="#top" className="font-display text-2xl md:text-3xl tracking-wider">
-          <span className="text-brand">💪</span> SWERVE <span className="text-brand">FITNESS</span>
+        <a href="#top" className="font-display text-2xl md:text-3xl tracking-wider flex items-center gap-2">
+          <img src={logoImg} alt="Swerve Fitness Logo" className="h-9 md:h-10 w-auto" />
+          <span>SWERVE <span className="text-brand">FITNESS</span></span>
         </a>
         <nav className="hidden lg:flex items-center gap-8 text-sm font-semibold uppercase tracking-wider">
           <a href="#about" className="hover:text-brand transition">About</a>
@@ -622,8 +625,9 @@ function Footer() {
     <footer className="bg-black border-t border-brand/40 py-12">
       <div className="mx-auto max-w-7xl px-5 grid md:grid-cols-3 gap-10">
         <div>
-          <div className="font-display text-2xl mb-3">
-            <span className="text-brand">💪</span> SWERVE FITNESS
+          <div className="font-display text-2xl mb-3 flex items-center gap-2">
+            <img src={logoImg} alt="Swerve Fitness Logo" className="h-9 w-auto" />
+            <span>SWERVE FITNESS</span>
           </div>
           <p className="text-white/60 text-sm">No Excuses. Just Results.</p>
         </div>
