@@ -625,8 +625,9 @@ function Footer() {
     <footer className="bg-black border-t border-brand/40 py-12">
       <div className="mx-auto max-w-7xl px-5 grid md:grid-cols-3 gap-10">
         <div>
-          <div className="font-display text-2xl mb-3">
-            <span className="text-brand">💪</span> SWERVE FITNESS
+          <div className="font-display text-2xl mb-3 flex items-center gap-2">
+            <img src={logoImg} alt="Swerve Fitness Logo" className="h-9 w-auto" />
+            <span>SWERVE FITNESS</span>
           </div>
           <p className="text-white/60 text-sm">No Excuses. Just Results.</p>
         </div>
