@@ -184,7 +184,7 @@ function About() {
     "🏋️ Modern Equipment",
     "👨‍🏫 Certified Trainers",
     "🧊 Ice & Steam Bath",
-    "🕐 Flexible Hours",
+    "🕐 Open 24/7",
     "👥 Group Classes",
     "💰 Affordable Membership",
   ];
@@ -297,7 +297,7 @@ function Why() {
   const items = [
     { icon: "🏆", title: "World Record Trainers", desc: "Our trainers aren't just certified — some hold world records. You're learning from the best." },
     { icon: "🤝", title: "Community Not Just a Gym", desc: "We remember your name. We celebrate your wins. Non-judgmental, welcoming, and genuinely supportive." },
-    { icon: "⏰", title: "Flexible Late Night Timing", desc: "Open till late night hours — perfect for professionals who can only train after work." },
+    { icon: "⏰", title: "Open 24/7", desc: "Train any time — we're open round the clock. Perfect for early risers, late grinders, and everyone in between." },
   ];
   return (
     <section id="why" className="bg-ink py-24 md:py-32 relative overflow-hidden">
@@ -443,16 +443,20 @@ function Contact() {
           {/* Left: info + map */}
           <div className="reveal reveal-left space-y-6">
             <div className="bg-ink-2 border border-border p-6 space-y-4">
-              <a
-                href={`tel:${PHONE}`}
-                className="flex items-start gap-4 group"
-              >
+              <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-brand/15 border border-brand text-brand flex items-center justify-center text-xl shrink-0">📞</div>
                 <div>
                   <div className="text-xs uppercase tracking-widest text-white/60">Call</div>
-                  <div className="font-semibold group-hover:text-brand transition">{PHONE_DISPLAY}</div>
+                  <div className="flex flex-col sm:flex-row sm:gap-4">
+                    <a href={`tel:${PHONE}`} className="font-semibold hover:text-brand transition">
+                      {PHONE_DISPLAY}
+                    </a>
+                    <a href={`tel:${PHONE_SECONDARY}`} className="font-semibold hover:text-brand transition">
+                      {PHONE_SECONDARY_DISPLAY}
+                    </a>
+                  </div>
                 </div>
-              </a>
+              </div>
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-brand/15 border border-brand text-brand flex items-center justify-center text-xl shrink-0">📍</div>
                 <div>
@@ -464,7 +468,7 @@ function Contact() {
                 <div className="w-12 h-12 bg-brand/15 border border-brand text-brand flex items-center justify-center text-xl shrink-0">🕐</div>
                 <div>
                   <div className="text-xs uppercase tracking-widest text-white/60">Hours</div>
-                  <div className="text-sm text-white/85">Open till late night — flexible timings for working professionals</div>
+                  <div className="text-sm text-white/85">Open 24/7 — train any time, day or night</div>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -636,20 +640,32 @@ function Footer() {
         <div>
           <div className="font-display text-lg mb-4 text-brand">Follow</div>
           <div className="flex gap-3">
-            {["Instagram", "Facebook", "YouTube"].map((s) => (
+            {[
+              { name: "Instagram", href: "https://www.instagram.com/swerve_fitness/" },
+              { name: "Facebook", href: "#" },
+              { name: "YouTube", href: "#" },
+            ].map((s) => (
               <a
-                key={s}
-                href="#"
-                aria-label={s}
+                key={s.name}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={s.name}
                 className="w-10 h-10 border border-border hover:border-brand hover:text-brand flex items-center justify-center text-xs uppercase"
               >
-                {s[0]}
+                {s.name[0]}
               </a>
             ))}
           </div>
-          <a href={`tel:${PHONE}`} className="block mt-5 text-sm text-white/70 hover:text-brand">
-            📞 {PHONE_DISPLAY}
-          </a>
+          <div className="mt-5 space-y-1 text-sm text-white/70">
+            <a href={`tel:${PHONE}`} className="block hover:text-brand">
+              📞 {PHONE_DISPLAY}
+            </a>
+            <a href={`tel:${PHONE_SECONDARY}`} className="block hover:text-brand">
+              📞 {PHONE_SECONDARY_DISPLAY}
+            </a>
+          </div>
+          <div className="mt-3 text-xs uppercase tracking-widest text-brand/80">Open 24/7</div>
         </div>
       </div>
       <div className="mx-auto max-w-7xl px-5 mt-10 pt-6 border-t border-border text-center text-xs text-white/40">
