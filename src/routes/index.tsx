@@ -28,10 +28,13 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const PHONE = "+910748363067";
-const PHONE_DISPLAY = "+91 07483630672";
+const PHONE = "+917483630672";
+const PHONE_DISPLAY = "+91 7483630672";
+const PHONE_SECONDARY = "+917676106939";
+const PHONE_SECONDARY_DISPLAY = "+91 7676106939";
 const WHATSAPP =
-  "https://wa.me/910748363067?text=Hi,%20I'd%20like%20to%20know%20more%20about%20Swerve%20Fitness%20membership";
+  "https://wa.me/917483630672?text=" +
+  encodeURIComponent("Hi, I'd like to know more about Swerve Fitness membership");
 const ADDRESS =
   "2nd Level, Dinesh Arcade, Whitefield - Hoskote Rd, opp. AWHO Vastu Bhoomi, Kannamangala, Bengaluru 560115";
 const MAPS_EMBED =
