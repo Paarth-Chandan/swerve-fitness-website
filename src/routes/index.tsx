@@ -80,8 +80,9 @@ function Header() {
       }`}
     >
       <div className="mx-auto max-w-7xl px-5 flex items-center justify-between gap-4">
-        <a href="#top" className="font-display text-2xl md:text-3xl tracking-wider">
-          <span className="text-brand">💪</span> SWERVE <span className="text-brand">FITNESS</span>
+        <a href="#top" className="font-display text-2xl md:text-3xl tracking-wider flex items-center gap-2">
+          <img src={logoImg} alt="Swerve Fitness Logo" className="h-9 md:h-10 w-auto" />
+          <span>SWERVE <span className="text-brand">FITNESS</span></span>
         </a>
         <nav className="hidden lg:flex items-center gap-8 text-sm font-semibold uppercase tracking-wider">
           <a href="#about" className="hover:text-brand transition">About</a>
