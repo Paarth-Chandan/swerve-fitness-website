@@ -645,21 +645,32 @@ function Footer() {
           <div className="font-display text-lg mb-4 text-brand">Follow</div>
           <div className="flex gap-3">
             {[
-              { name: "Instagram", href: "https://www.instagram.com/swerve_fitness/" },
-              { name: "Facebook", href: "#" },
-              { name: "YouTube", href: "#" },
-            ].map((s) => (
-              <a
-                key={s.name}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={s.name}
-                className="w-10 h-10 border border-border hover:border-brand hover:text-brand flex items-center justify-center text-xs uppercase"
-              >
-                {s.name[0]}
-              </a>
-            ))}
+              {
+                name: "Instagram",
+                href: "https://www.instagram.com/swerve_fitness/",
+                icon: Instagram,
+              },
+              {
+                name: "Facebook",
+                href: "https://www.facebook.com/profile.php?id=100063002512239",
+                icon: Facebook,
+              },
+              { name: "YouTube", href: "#", icon: Youtube },
+            ].map((s) => {
+              const Icon = s.icon;
+              return (
+                <a
+                  key={s.name}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.name}
+                  className="w-10 h-10 bg-ink-2 border border-border hover:border-brand hover:text-brand text-white flex items-center justify-center transition-colors"
+                >
+                  <Icon size={18} />
+                </a>
+              );
+            })}
           </div>
           <div className="mt-5 space-y-1 text-sm text-white/70">
             <a href={`tel:${PHONE}`} className="block hover:text-brand">
