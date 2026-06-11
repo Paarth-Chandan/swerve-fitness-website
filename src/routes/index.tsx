@@ -41,9 +41,7 @@ const WHATSAPP =
 const ADDRESS =
   "2nd Level, Dinesh Arcade, Whitefield - Hoskote Rd, opp. AWHO Vastu Bhoomi, Kannamangala, Bengaluru 560115";
 const MAPS_EMBED =
-  "https://www.google.com/maps?q=" +
-  encodeURIComponent("Swerve Fitness, Krishnarajapuram, Bengaluru") +
-  "&ll=13.0199732,77.7623329&z=17&output=embed";
+  "https://maps.google.com/maps?q=Swerve+Fitness,+Dinesh+Arcade,+Main+Road,+Whitefield+Hoskote+Rd,+opp.+AWHO,+Vastu+Bhoomi,+Krishnarajapuram,+Bengaluru,+Karnataka+560115&output=embed";
 
 function useReveal() {
   useEffect(() => {
@@ -482,17 +480,17 @@ function Contact() {
               </div>
             </div>
 
-            <div className="aspect-[4/3] border border-border overflow-hidden">
-              <iframe
-                title="Swerve Fitness location"
-                src={MAPS_EMBED}
-                width="100%"
-                height="100%"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="border-0 grayscale contrast-125"
-              />
-            </div>
+            <iframe
+              title="Swerve Fitness location"
+              src={MAPS_EMBED}
+              width="100%"
+              height="450"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="border border-border grayscale contrast-125"
+            />
           </div>
 
           {/* Right: form */}
