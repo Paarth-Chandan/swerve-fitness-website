@@ -42,8 +42,8 @@ const ADDRESS =
   "2nd Level, Dinesh Arcade, Whitefield - Hoskote Rd, opp. AWHO Vastu Bhoomi, Kannamangala, Bengaluru 560115";
 const MAPS_EMBED =
   "https://www.google.com/maps?q=" +
-  encodeURIComponent(ADDRESS) +
-  "&output=embed";
+  encodeURIComponent("Swerve Fitness, Krishnarajapuram, Bengaluru") +
+  "&ll=13.0199732,77.7623329&z=17&output=embed";
 
 function useReveal() {
   useEffect(() => {
