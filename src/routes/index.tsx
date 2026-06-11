@@ -480,17 +480,17 @@ function Contact() {
               </div>
             </div>
 
-            <div className="aspect-[4/3] border border-border overflow-hidden">
-              <iframe
-                title="Swerve Fitness location"
-                src={MAPS_EMBED}
-                width="100%"
-                height="100%"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="border-0 grayscale contrast-125"
-              />
-            </div>
+            <iframe
+              title="Swerve Fitness location"
+              src={MAPS_EMBED}
+              width="100%"
+              height="450"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="border border-border grayscale contrast-125"
+            />
           </div>
 
           {/* Right: form */}
