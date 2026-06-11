@@ -561,7 +561,7 @@ function Contact() {
                 </div>
                 {submitStatus === 'error' && (
                   <div className="bg-red-600/10 border border-red-600/40 text-red-400 px-4 py-3 text-sm">
-                    Something went wrong, please call us on {PHONE_DISPLAY}
+                    Something went wrong, please call us on +91 07483630672
                   </div>
                 )}
                 <button
