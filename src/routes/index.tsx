@@ -416,19 +416,17 @@ function Contact() {
     setFormErrors({});
     setSubmitStatus('idle');
 
-    fetch('https://script.google.com/macros/s/AKfycbz9mhPS7bbWRiSPj0sV4b4LBRddyzc27SCRt3T7e9zpjm-GpLZ95qisO7WA3jt6mo85/exec', {
+    setSubmitStatus('success');
+    form.reset();
+
+    fetch('https://script.google.com/macros/s/AKfycbx_5qXebnroeZD4pUN1Zu4her0LgS9M4Q_-WdcoTClalAkZeZPd5lsqi4VGL98fgcyr/exec', {
       method: 'POST',
       mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, phone, goal, preferredTiming, message }),
-    })
-      .then(() => {
-        setSubmitStatus('success');
-        form.reset();
-      })
-      .catch(() => {
-        setSubmitStatus('error');
-      });
+    }).catch(() => {
+      setSubmitStatus('error');
+    });
   };
 
   return (
