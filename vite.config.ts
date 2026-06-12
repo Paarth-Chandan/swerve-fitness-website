@@ -14,8 +14,6 @@ export default defineConfig({
   },
   // Target Vercel for deployment (overrides the default Cloudflare preset).
   nitro: {
-    config: {
-      preset: "vercel",
-    },
+    preset: "vercel",
   },
 });
