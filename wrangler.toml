@@ -2,5 +2,4 @@ name = "swerve-fitness-website"
 compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat"]
 
-[site]
-bucket = "./dist"
+assets = { directory = "./dist" }
