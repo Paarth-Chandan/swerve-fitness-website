@@ -4,6 +4,9 @@ import { Instagram, Facebook, Youtube } from "lucide-react";
 import heroImg from "@/assets/hero-gym.jpg";
 import aboutImg from "@/assets/about-training.jpg";
 import logoImg from "@/assets/swerve-logo.png";
+import about1Img from "@/assets/about-1.jpg";
+import about2Img from "@/assets/about-2.jpg";
+import about3Img from "@/assets/about-3.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -233,6 +236,23 @@ function About() {
               >
                 {c}
               </span>
+            ))}
+          </div>
+          <div className="mt-8 grid grid-cols-3 gap-3 md:gap-4 overflow-x-auto md:overflow-visible no-scrollbar">
+            {[about1Img, about2Img, about3Img].map((src, i) => (
+              <div
+                key={i}
+                className="relative group overflow-hidden border border-brand/40 hover:border-brand transition min-w-[140px]"
+              >
+                <span className="pointer-events-none absolute top-0 left-0 h-3 w-3 border-t-2 border-l-2 border-brand z-10" />
+                <span className="pointer-events-none absolute bottom-0 right-0 h-3 w-3 border-b-2 border-r-2 border-brand z-10" />
+                <img
+                  src={src}
+                  alt={`Swerve Fitness gym photo ${i + 1}`}
+                  loading="lazy"
+                  className="w-full h-32 md:h-40 object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
             ))}
           </div>
         </div>
