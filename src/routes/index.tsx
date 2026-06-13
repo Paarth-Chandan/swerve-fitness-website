@@ -4,6 +4,9 @@ import { Instagram, Facebook, Youtube } from "lucide-react";
 import heroImg from "@/assets/hero-gym.jpg";
 import aboutImg from "@/assets/about-training.jpg";
 import logoImg from "@/assets/swerve-logo.png";
+import about1Img from "@/assets/about-1.jpg";
+import about2Img from "@/assets/about-2.jpg";
+import about3Img from "@/assets/about-3.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
